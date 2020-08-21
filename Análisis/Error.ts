@@ -6,13 +6,10 @@ export class Error{
     ambito:String;
     fase:String;
 
-    constructor(tipo:String, descripcion:any, linea:number, columna:number, ambito:String, fase:String){
+    constructor(tipo:String, descripcion:any, linea:number){
         this.tipo = tipo;
         this.descripcion = descripcion;
         this.linea = linea;
-        this.columna = columna;
-        this.ambito = ambito;
-        this.fase = fase;
     }
 
     toString():String{

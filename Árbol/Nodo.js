@@ -2,12 +2,15 @@
 exports.__esModule = true;
 exports.Nodo = void 0;
 var Nodo = /** @class */ (function () {
-    function Nodo(linea, columna, nonterminal, valor) {
+    function Nodo(linea, valor) {
         this.linea = linea;
-        this.columna = columna;
-        this.nonterminal = nonterminal;
+        this.nonterminal = "";
         this.valor = valor;
+        this.hijos = [];
     }
+    Nodo.prototype.nuevoHijo = function (nuevo) {
+        this.hijos.push(nuevo);
+    };
     return Nodo;
 }());
 exports.Nodo = Nodo;

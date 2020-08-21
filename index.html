@@ -225,6 +225,84 @@
                 </div>
                 <div class="row">
                     <div class="col-12">
+                        <!-- Tabs -->
+                        <div class="card">
+                            <!-- Nav tabs -->
+                            <ul class="nav nav-tabs" role="tablist">
+                                <li class="nav-item"> <a class="nav-link active" data-toggle="tab" href="#consola" role="tab"><span class="hidden-sm-up"></span> <span class="hidden-xs-down">Consola</span></a> </li>
+                                <li class="nav-item"> <a class="nav-link" data-toggle="tab" href="#AST" role="tab"><span class="hidden-sm-up"></span> <span class="hidden-xs-down">AST</span></a> </li>
+                                <li class="nav-item"> <a class="nav-link" data-toggle="tab" href="#Errores" role="tab"><span class="hidden-sm-up"></span> <span class="hidden-xs-down">Errores</span></a> </li>
+                                <li class="nav-item"> <a class="nav-link" data-toggle="tab" href="#Simbolos" role="tab"><span class="hidden-sm-up"></span> <span class="hidden-xs-down">Tabla de Símbolos</span></a> </li>
+                            </ul>
+                            <!-- Tab panes -->
+                            <div class="tab-content tabcontent-border">
+                                <div class="tab-pane active" id="consola" role="tabpanel">
+                                    <div class="p-20">
+                                        <textarea spellcheck="false" style="font-family: 'Courier New', Courier, monospace;" cols="151" rows="11"
+                                        readonly>Output</textarea> 
+                                    </div>
+                                </div>
+                                <div class="tab-pane  p-20" id="AST" role="tabpanel">
+                                    <div class="p-20">
+                                        <!-- Tabs -->
+                                        <div class="card">
+                                            <!-- Nav tabs -->
+                                            <ul class="nav nav-tabs" role="tablist">
+                                                <li class="nav-item"> <a class="nav-link active" data-toggle="tab" href="#sintetizado" role="tab"><span class="hidden-sm-up"></span> <span class="hidden-xs-down">Sintetizado</span></a> </li>
+                                                <li class="nav-item"> <a class="nav-link" data-toggle="tab" href="#heredado" role="tab"><span class="hidden-sm-up"></span> <span class="hidden-xs-down">Heredado</span></a> </li>
+                                            </ul>
+                                            <!-- Tab panes -->
+                                            <div class="tab-content tabcontent-border">
+                                                <div class="tab-pane active" id="sintetizado" role="tabpanel">
+                                                    <div class="p-20">
+                                                        <img src="assets/images/background/img4.jpg" class="img-fluid">
+                                                    </div>
+                                                </div>
+                                                <div class="tab-pane  p-20" id="heredado" role="tabpanel">
+                                                    <div class="p-20">
+                                                        <img src="assets/images/background/img4.jpg" class="img-fluid">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="tab-pane p-20" id="Errores" role="tabpanel">
+                                    <div class="p-20">
+                                        <table class="table">
+                                            <thead>
+                                                <tr>
+                                                    <th scope="col">Tipo</th>
+                                                    <th scope="col">Descripción</th>
+                                                    <th scope="col">Línea</th>
+                                                    <th scope="col">Columna</th>
+                                                    <th scope="col">Tiempo</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                                <div class="tab-pane p-20" id="Simbolos" role="tabpanel">
+                                    <div class="p-20">
+                                        <table class="table">
+                                            <thead>
+                                                <tr>
+                                                    <th scope="col">Tipo</th>
+                                                    <th scope="col">Descripción</th>
+                                                    <th scope="col">Línea</th>
+                                                    <th scope="col">Columna</th>
+                                                    <th scope="col">Tiempo</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
 
@@ -237,7 +315,7 @@
             <!-- footer -->
             <!-- ============================================================== -->
             <footer class="footer text-center">
-                MatrioshTS - Septiembre 2020
+                Mariana Sic - Septiembre 2020
             </footer>
             <!-- ============================================================== -->
             <!-- End footer -->

@@ -128,7 +128,7 @@
              <div class="page-breadcrumb">
                 <div class="row">
                     <div class="col-12 d-flex no-block align-items-center">
-                        <h4 class="page-title">Bienvenido</h4>
+                        <pre><h4 class="page-title">Bienvenido</h4></pre>
                     </div>
                 </div>
             </div>
@@ -142,30 +142,89 @@
                 <!-- ============================================================== -->
                 <!-- editor -->
                 <div class="row">
-                    <div class="col-12">
-                        <!-- Tabs -->
+                    <div class="col-5">
                         <div class="card">
-                            <!-- Nav tabs -->
-                            <ul class="nav nav-tabs" role="tablist">
-                                <li class="nav-item"> <a class="nav-link active" data-toggle="tab" href="#home" role="tab"><span class="hidden-sm-up"></span> <span class="hidden-xs-down">Código</span></a> </li>
-                                <li class="nav-item"> <a class="nav-link" data-toggle="tab" href="#profile" role="tab"><span class="hidden-sm-up"></span> <span class="hidden-xs-down">Traducción</span></a> </li>
-                            </ul>
-                            <!-- Tab panes -->
-                            <div class="tab-content tabcontent-border">
-                                <div class="tab-pane active" id="home" role="tabpanel">
-                                    <div class="p-20">
-                                        <h4 class="card-title">Comienza escribiendo tu código aquí...</h4>
-                                        <textarea id="editor-txt"></textarea>
-                                    </div>
-                                </div>
-                                <div class="tab-pane" id="profile" role="tabpanel">
-                                    <div class="p-20">
-                                        <h4 class="card-title">Resultado de Traducción</h4>
-                                        <textarea id="traducir-txt"></textarea>
-                                    </div>
-                                </div>
+                            <div class="card-body">
+                                <h4 class="card-title"><pre><span class="badge badge-pill badge-success">INICIO</span>     Comienza escribiendo tu código aquí... </pre></h4>
+                                <textarea spellcheck="false" style="font-family: 'Courier New', Courier, monospace;" cols="55" rows="22"
+                                onkeydown="if(event.keyCode===9){var v=this.value,s=this.selectionStart,e=this.selectionEnd;this.value=v.substring(0, s)+'\t'+v.substring(e);this.selectionStart=this.selectionEnd=s+1;return false;}"
+                                onkeyup="getLineNumberAndColumnIndex(this, 1);" onmouseup="this.onkeyup();"></textarea> 
                             </div>
                         </div>
+                    </div>
+                    <div class="col-2">
+                        <div class="card">
+                            <table class="table">
+                                <tbody>
+                                    <tr>
+                                        <td style="text-align: center;">
+                                            <button type="button" class="btn btn-primary btn-sm">Traducir</button>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td style="text-align: center;">
+                                            <button type="button" class="btn btn-info btn-sm">Ejecutar</button>
+                                        </td>
+                                    </tr>
+                              </tbody>
+                            </table>
+                        </div>
+                        <div class="card">
+                            <table class="table">
+                                <tbody>
+                                    <tr>
+                                        <td colspan="2" style="text-align: center;">
+                                            <span class="badge badge-pill badge-success">INICIO</span>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td  style="text-align: center;">
+                                            <pre>Línea</pre>
+                                            <pre><label id="l1"></label></pre>
+                                        </td>
+                                        <td style="text-align: center;">
+                                            <pre>Columna</pre>
+                                            <pre><label id="c1"></label></pre>
+                                        </td>
+                                    </tr>
+                              </tbody>
+                            </table>
+                        </div>
+                        <div class="card">
+                            <table class="table">
+                                <tbody>
+                                    <tr>
+                                        <td colspan="2" style="text-align: center;">
+                                            <span class="badge badge-pill badge-warning">TRADUCCIÓN</span>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td  style="text-align: center;">
+                                            <pre>Línea</pre>
+                                            <pre><label id="l2"></label></pre>
+                                        </td>
+                                        <td style="text-align: center;">
+                                            <pre>Columna</pre>
+                                            <pre><label id="c2"></label></pre>
+                                        </td>
+                                    </tr>
+                              </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="col-5">
+                        <div class="card">
+                            <div class="card-body">
+                                <h4 class="card-title"><pre><span class="badge badge-pill badge-warning">TRADUCCIÓN</span>     Resultado de Traducción </pre></h4>
+                                <textarea spellcheck="false" style="font-family: 'Courier New', Courier, monospace;" cols="55" rows="22"
+                                onkeydown="if(event.keyCode===9){var v=this.value,s=this.selectionStart,e=this.selectionEnd;this.value=v.substring(0, s)+'\t'+v.substring(e);this.selectionStart=this.selectionEnd=s+1;return false;}"
+                                onkeyup="getLineNumberAndColumnIndex(this, 2);" onmouseup="this.onkeyup();"></textarea> 
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-12">
                     </div>
                 </div>
 
@@ -230,6 +289,20 @@
             lineNumbers:true,
             mode: "text/typescript"
         });
+
+        function getLineNumberAndColumnIndex(textarea, number){
+            var textLines = textarea.value.substr(0, textarea.selectionStart).split("\n");
+            var currentLineNumber = textLines.length;
+            var currentColumnIndex = textLines[textLines.length-1].length + 1;
+            setLabel(number, currentLineNumber, currentColumnIndex);
+        }
+
+        function setLabel(number, currentLineNumber, currentColumnIndex){
+            var linea = 'l' + number;
+            var col = 'c' + number;
+            document.getElementById(linea).innerHTML = currentLineNumber;
+            document.getElementById(col).innerHTML = currentColumnIndex;
+        }
     </script>
 
 </body>

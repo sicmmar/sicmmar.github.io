@@ -11,4 +11,6 @@ function analizar(entrada){
     }
 }
 
-analizar(texto);
+function ejecutar(){
+    analizar(texto);
+}

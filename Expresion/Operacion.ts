@@ -1,4 +1,4 @@
-import { Nodo } from "../Árbol/Nodo";
+import { Nodo } from "../Arbol/Nodo";
 import { Entorno } from "../Entorno/Entorno";
 import { Expresion } from "./Expresion";
 

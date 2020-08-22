@@ -1,4 +1,4 @@
-import { Nodo } from "../Árbol/Nodo";
+import { Nodo } from "../Arbol/Nodo";
 
 export class Expresion extends Nodo{
     tipo:number;

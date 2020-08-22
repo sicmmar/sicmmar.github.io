@@ -14,7 +14,7 @@ var __extends = (this && this.__extends) || (function () {
 })();
 exports.__esModule = true;
 exports.Expresion = void 0;
-var Nodo_1 = require("../\u00C1rbol/Nodo");
+var Nodo_1 = require("../Arbol/Nodo");
 var Expresion = /** @class */ (function (_super) {
     __extends(Expresion, _super);
     function Expresion(valor, linea, tipo) {

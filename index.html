@@ -358,18 +358,9 @@
     <script src="assets/libs/flot/jquery.flot.crosshair.js"></script>
     <script src="assets/libs/flot.tooltip/js/jquery.flot.tooltip.min.js"></script>
     <script src="dist/js/pages/chart/chart-page-init.js"></script>
+    <script src="Analisis/Analizador.js"></script>
     <script src="main.js"></script>
     <script>
-        var txtArea = this.document.getElementById("editor-txt");
-        var txt = this.document.getElementById("traducir-txt");
-        var editor = CodeMirror.fromTextArea(txtArea, {
-            lineNumbers:true,
-            mode: "application/typescript"
-        });
-        var txtEdit = CodeMirror.fromTextArea(txt, {
-            lineNumbers:true,
-            mode: "text/typescript"
-        });
 
         function getLineNumberAndColumnIndex(textarea, number){
             var textLines = textarea.value.substr(0, textarea.selectionStart).split("\n");
@@ -384,6 +375,12 @@
             document.getElementById(linea).innerHTML = currentLineNumber;
             document.getElementById(col).innerHTML = currentColumnIndex;
         }
+
+        function ejecutar(){
+            var texto = document.getElementById('inicioTXT').value;
+            analizar(texto);
+        }
+        
     </script>
 
 </body>

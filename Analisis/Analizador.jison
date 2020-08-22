@@ -43,7 +43,7 @@
 ":"     return ':';
 "."     return '.';
 
-"number"           return 'rnumber';
+"number"        return 'rnumber';
 "string"        return 'rstring';
 "boolean"       return 'rboolean';
 "void"          return 'rvoid';
@@ -62,6 +62,8 @@
 "return"        return 'rreturn';
 "let"           return 'rlet';
 "const"         return 'rconst';
+"console"       return 'rconsole';
+"log"           return 'rlog';
 
 
 [0-9]+("."[0-9]+)?                          %{ return 'numero'; %}
@@ -107,6 +109,7 @@ LINSTRUCCION
 
 INSTRUCCION
     : VAR
+    | 'rconsole' '.' 'rlog' '(' EXP ')' 'pyc'
     ;
 
 VAR

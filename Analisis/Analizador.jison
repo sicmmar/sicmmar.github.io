@@ -2,8 +2,8 @@
     /*let NodoExp = require('../Arbol/Nodo');
     let Op = require('../Expresión/Operacion');
     let err = require('./Error');
-    let lista = require('./ManejoError');
-    var listaErrores = new lista.ManejoError();*/
+    let lista = require('./ManejoError');*/
+    var listaErrores = ManejoError();
 %}
 
 
@@ -64,7 +64,7 @@
 "const"         return 'rconst';
 "console"       return 'rconsole';
 "log"           return 'rlog';
-
+"type"          return 'rtypes';
 
 [0-9]+("."[0-9]+)?                          %{ return 'numero'; %}
 [a-zA-Z_][a-zA-Z0-9_]*                      %{ return 'identificador'; %}
@@ -76,7 +76,7 @@
 
 <<EOF>>         %{ return 'EOF'; %}
 
-.               listaErrores.agregar(new err.Error("Lexico", "Caracter "  + yytext +  " no admitido", yylineno));
+.               listaErrores.agregar(Error("Lexico", "Caracter "  + yytext +  " no admitido", yylineno));
 
 /lex
 
@@ -99,79 +99,79 @@
 %% /* language grammar */
 
 INICIO
-    : LINSTRUCCION EOF
+    : LINSTRUCCION EOF {return "Done";}
     ;
 
 LINSTRUCCION
-    : LINSTRUCCION INSTRUCCION
-    | INSTRUCCION 
+    : LINSTRUCCION INSTRUCCION {}
+    | INSTRUCCION {}
     ;
 
 INSTRUCCION
-    : VAR
-    | 'rconsole' '.' 'rlog' '(' EXP ')' 'pyc'
+    : VAR {}
+    | 'rconsole' '.' 'rlog' '(' EXP ')' 'pyc' {}
     ;
 
 VAR
-    : T LVAR 'pyc'
-    | T LVAR '=' EXP 'pyc' 
-    | 'identificador' '=' EXP 'pyc'  
-    | error 'pyc'
-    | error '}'
+    : T LVAR 'pyc' {}
+    | T LVAR '=' EXP 'pyc' {}
+    | 'identificador' '=' EXP 'pyc' {}
+    | error 'pyc' {}
+    | error '}' {}
     ;
 
 T
-    : 'rlet'
-    | 'rconst'
+    : 'rlet' {}
+    | 'rconst' {}
     ;
 
 LVAR
-    : LVAR ',' 'identificador' ':' TIPO 
-    | 'identificador' ':' TIPO 
+    : LVAR ',' 'identificador' ':' TIPO {}
+    | 'identificador' ':' TIPO {}
     ;
 
 TIPO
-    : 'rnumber' 
-    | 'rstring' 
-    | 'rboolean'  
-    | 'rvoid'  
-    /*| 'rtypes'
-    */;
+    : 'rnumber' {}
+    | 'rstring' {}
+    | 'rboolean' {} 
+    | 'rvoid'  {}
+    | 'rtypes' {}
+    ;
 
 AOD
-    : EXP '++' 
-    | EXP '--'  
+    : EXP '++' {}
+    | EXP '--'  {}
     ;
 
 LENVIO
-    : LENVIO ',' EXP 
-    | EXP 
+    : LENVIO ',' EXP {}
+    | EXP {}
     ;
 
 EXP
-    : '(' EXP ')'  
-    | EXP '||' EXP 
-    | '!' EXP  
-    | EXP '&&' EXP 
-    | EXP '==' EXP 
-    | EXP '!=' EXP 
-    | EXP '<' EXP
-    | EXP '<=' EXP
-    | EXP '>' EXP 
-    | EXP '>=' EXP
-    | EXP '+' EXP 
-    | EXP '-' EXP
-    | EXP '*' EXP
-    | EXP '/' EXP 
-    | EXP '^' EXP 
-    | EXP '%' EXP
-    | '-' EXP %prec UMINUS
-    | 'identificador' '(' LENVIO ')'
-    | 'identificador' '(' ')' 
-    | AOD  
-    | 'identificador' 
-    | 'rfalse' 
-    | 'rtrue' 
-    | 'numero' 
-    | 'cadena'
+    : '(' EXP ')'  {}
+    | EXP '||' EXP {}
+    | '!' EXP  {}
+    | EXP '&&' EXP {}
+    | EXP '==' EXP {}
+    | EXP '!=' EXP {}
+    | EXP '<' EXP {}
+    | EXP '<=' EXP {}
+    | EXP '>' EXP {}
+    | EXP '>=' EXP {}
+    | EXP '+' EXP {}
+    | EXP '-' EXP {}
+    | EXP '*' EXP {}
+    | EXP '/' EXP {}
+    | EXP '^' EXP {}
+    | EXP '%' EXP {}
+    | '-' EXP %prec UMINUS {}
+    | 'identificador' '(' LENVIO ')' {}
+    | 'identificador' '(' ')' {}
+    | AOD  {}
+    | 'identificador' {}
+    | 'rfalse' {}
+    | 'rtrue' {}
+    | 'numero' {}
+    | 'cadena' {}
     ;

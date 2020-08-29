@@ -2,13 +2,10 @@
 exports.__esModule = true;
 exports.Error = void 0;
 var Error = /** @class */ (function () {
-    function Error(tipo, descripcion, linea, columna, ambito, fase) {
+    function Error(tipo, descripcion, linea) {
         this.tipo = tipo;
         this.descripcion = descripcion;
         this.linea = linea;
-        this.columna = columna;
-        this.ambito = ambito;
-        this.fase = fase;
     }
     Error.prototype.toString = function () {
         return "<tr><td>" + this.tipo + "</td><td>" + this.descripcion + "</td><td>" + this.linea + "</td>" +

@@ -1,3 +1,3 @@
-# sicmmar.github.io
+# Mariana Sic
 Proyecto 1
 Compiladores 2

@@ -1,9 +1,9 @@
 %{
     /*let NodoExp = require('../Arbol/Nodo');
     let Op = require('../Expresión/Operacion');*/
-    let err = require('Error');
-    let lista = require('ManejoError');
-    var listaErrores = new lista.ManejoError();
+    import err from 'Error';
+    //let lista = require('ManejoError');
+    //var listaErrores = new lista.ManejoError();
 %}
 
 

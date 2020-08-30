@@ -9,6 +9,7 @@
   "author": "sicmmar",
   "license": "ISC",
   "dependencies": {
+    "browserify": "^16.5.2",
     "express": "^4.17.1",
     "require": "^2.4.20"
   }

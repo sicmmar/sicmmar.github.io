@@ -22,6 +22,8 @@ var Operacion = /** @class */ (function (_super) {
         _this.izq = izq;
         _this.der = der;
         _this.operacion = operacion;
+        _this.nuevoHijo(izq);
+        _this.nuevoHijo(der);
         return _this;
     }
     Operacion.prototype.ejecutar = function (ent) {

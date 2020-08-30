@@ -1,9 +1,9 @@
 %{
     /*let NodoExp = require('../Arbol/Nodo');
-    let Op = require('../Expresión/Operacion');
-    let err = require('./Error');
-    let lista = require('./ManejoError');*/
-    var listaErrores = ManejoError();
+    let Op = require('../Expresión/Operacion');*/
+    let err = require('Error');
+    let lista = require('ManejoError');
+    var listaErrores = new lista.ManejoError();
 %}
 
 
@@ -76,7 +76,7 @@
 
 <<EOF>>         %{ return 'EOF'; %}
 
-.               listaErrores.agregar(Error("Lexico", "Caracter "  + yytext +  " no admitido", yylineno));
+.               listaErrores.agregar(new err.Error("Lexico", "Caracter "  + yytext +  " no admitido", yylineno));
 
 /lex
 

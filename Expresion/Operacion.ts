@@ -12,6 +12,8 @@ export class Operacion extends Expresion{
         this.izq = izq;
         this.der = der;
         this.operacion = operacion;
+        this.nuevoHijo(izq);
+        this.nuevoHijo(der);
     }
 
     ejecutar(ent:Entorno):any {

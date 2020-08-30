@@ -1,9 +1,10 @@
 %{
     /*let NodoExp = require('../Arbol/Nodo');
     let Op = require('../Expresión/Operacion');*/
-    import err from 'Error';
-    //let lista = require('ManejoError');
+    //var err = require('Error');
+    //let lista = require('./ManejoError');
     //var listaErrores = new lista.ManejoError();
+    var err = {tipo: 'lexico', descripcion: 'error 1', linea: 5, columna: 6, ambito: 'global', fase: 'traduccion'};
 %}
 
 
@@ -76,7 +77,7 @@
 
 <<EOF>>         %{ return 'EOF'; %}
 
-.               listaErrores.agregar(new err.Error("Lexico", "Caracter "  + yytext +  " no admitido", yylineno));
+.               listaError.push(err);
 
 /lex
 
@@ -99,7 +100,7 @@
 %% /* language grammar */
 
 INICIO
-    : LINSTRUCCION EOF {return "Done";}
+    : LINSTRUCCION EOF {console.log(toString(err));}
     ;
 
 LINSTRUCCION

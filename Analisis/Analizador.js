@@ -84,7 +84,231 @@ performAction: function anonymous(yytext, yyleng, yylineno, yy, yystate /* actio
 var $0 = $$.length - 1;
 switch (yystate) {
 case 1:
-console.log(toString(err));
+ var h = [];
+                        h.push($$[$0-1]);
+                        return newNodo("INICIO", "", yylineno, h); 
+break;
+case 2:
+ this.$ = $$[$0-1];
+                                this.$.hijos.push($$[$0]);
+break;
+case 3:
+ var h = [];
+                    h.push($$[$0]);
+                    this.$ = newNodo("LINSTRUCCION", "", yylineno, h);
+break;
+case 4: case 43:
+ this.$ = $$[$0]; 
+break;
+case 5:
+ var h = [];
+                                        h.push($$[$0-2]);
+                                        this.$ = newNodo("IMPRIMIR", "", yylineno, h); 
+break;
+case 6:
+ var h = [];
+                    h.push($$[$0-2]);
+                    h.push($$[$0-1]);
+                    this.$ = newNodo("VAR", "", yylineno, h); 
+break;
+case 7:
+ var h = [];
+                    h.push($$[$0-4]);
+                    h.push($$[$0-3]);
+                    h.push($$[$0-1]);
+                    this.$ = newNodo("VAR", "", yylineno, h);
+break;
+case 8:
+ var h = [];
+                    h.push(newNodo("IDENTIFICADOR", $$[$0-3], yylineno, []));
+                    h.push($$[$0-1]);
+                    this.$ = newNodo("VAR", "", yylineno, h);
+break;
+case 11: case 12: case 15: case 16: case 17: case 18: case 19:
+ this.$ = newNodo("TIPO", $$[$0], yylineno, []); 
+break;
+case 13:
+ var h = [];
+                            h.push(newNodo("IDENTIFICADOR", $$[$0-2], yylineno, [])); 
+                            h.push($$[$0]);
+                            var n = newNodo("ID", "", yylineno, h);
+                            this.$ = $$[$0-4];
+                            this.$.hijos.push(n); 
+break;
+case 14:
+ var h = [];
+                            h.push(newNodo("IDENTIFICADOR", $$[$0-2], yylineno, [])); 
+                            h.push($$[$0]);
+                            var n = newNodo("ID", "", yylineno, h);
+                            h = [];
+                            h.push(n);
+                            this.$ = newNodo("LISTAVAR", "", yylineno, h);
+                            
+break;
+case 20:
+ var h = [];
+                h.push($$[$0-1]);
+                h.push(newNodo("++", "", yylineno, []));
+                this.$ = newNodo("AUMENTO", "", yylineno, h);
+break;
+case 21:
+ var h = [];
+                h.push($$[$0-1]);
+                h.push(newNodo("--", "", yylineno, []));
+                this.$ = newNodo("DECREMENTO", "", yylineno, h);
+break;
+case 22:
+ var h = [];
+        h.push($$[$0]);
+        var e = newNodo("EXP", "", yylineno, h);
+        h = [];
+        h.push(e);
+        this.$ = $$[$0-2];
+        this.$.hijos.push(h);
+break;
+case 23:
+ var h = [];
+        h.push($$[$0]);
+        var e = newNodo("EXP", "", yylineno, h);
+        h = [];
+        h.push(e);
+        this.$ = newNodo("LISTA", "", yylineno, h);
+break;
+case 24:
+ this.$ = $$[$0-1]; 
+break;
+case 25:
+ var h = [];
+                    h.push($$[$0-2]);
+                    h.push(newNodo("", $$[$0-1], yylineno, []));
+                    h.push($$[$0]);
+                    this.$ = newNodo("Or", "", yylineno, h);
+break;
+case 26:
+ var h = [];
+                    h.push(newNodo("", $$[$0-1], yylineno, []));
+                    h.push($$[$0]);
+                    this.$ = newNodo("Mayor o Igual", "", yylineno, h);
+break;
+case 27:
+ var h = [];
+                    h.push($$[$0-2]);
+                    h.push(newNodo("", $$[$0-1], yylineno, []));
+                    h.push($$[$0]);
+                    this.$ = newNodo("And", "", yylineno, h);
+break;
+case 28:
+ var h = [];
+                    h.push($$[$0-2]);
+                    h.push(newNodo("", $$[$0-1], yylineno, []));
+                    h.push($$[$0]);
+                    this.$ = newNodo("Igual", "", yylineno, h);
+break;
+case 29:
+ var h = [];
+                    h.push($$[$0-2]);
+                    h.push(newNodo("", $$[$0-1], yylineno, []));
+                    h.push($$[$0]);
+                    this.$ = newNodo("Diferente", "", yylineno, h);
+break;
+case 30:
+ var h = [];
+                    h.push($$[$0-2]);
+                    h.push(newNodo("", $$[$0-1], yylineno, []));
+                    h.push($$[$0]);
+                    this.$ = newNodo("Menor", "", yylineno, h);
+break;
+case 31:
+ var h = [];
+                    h.push($$[$0-2]);
+                    h.push(newNodo("", $$[$0-1], yylineno, []));
+                    h.push($$[$0]);
+                    this.$ = newNodo("Menor o Igual", "", yylineno, h);
+break;
+case 32:
+ var h = [];
+                    h.push($$[$0-2]);
+                    h.push(newNodo("", $$[$0-1], yylineno, []));
+                    h.push($$[$0]);
+                    this.$ = newNodo("Mayor", "", yylineno, h);
+break;
+case 33:
+ var h = [];
+                    h.push($$[$0-2]);
+                    h.push(newNodo("", $$[$0-1], yylineno, []));
+                    h.push($$[$0]);
+                    this.$ = newNodo("Mayor o Igual", "", yylineno, h);
+break;
+case 34:
+ var h = [];
+                    h.push($$[$0-2]);
+                    h.push(newNodo("Mas", $$[$0-1], yylineno, []));
+                    h.push($$[$0]);
+                    this.$ = newNodo("Suma", "", yylineno, h);
+break;
+case 35:
+ var h = [];
+                    h.push($$[$0-2]);
+                    h.push(newNodo("Menos", $$[$0-1], yylineno, []));
+                    h.push($$[$0]);
+                    this.$ = newNodo("Resta", "", yylineno, h);
+break;
+case 36:
+ var h = [];
+                    h.push($$[$0-2]);
+                    h.push(newNodo("Mult", $$[$0-1], yylineno, []));
+                    h.push($$[$0]);
+                    this.$ = newNodo("Multiplicacion", "", yylineno, h);
+break;
+case 37:
+ var h = [];
+                    h.push($$[$0-2]);
+                    h.push(newNodo("Div", $$[$0-1], yylineno, []));
+                    h.push($$[$0]);
+                    this.$ = newNodo("Division", "", yylineno, h);
+break;
+case 38:
+ var h = [];
+                    h.push($$[$0-2]);
+                    h.push(newNodo("Pot", $$[$0-1], yylineno, []));
+                    h.push($$[$0]);
+                    this.$ = newNodo("Potencia", "", yylineno, h);
+break;
+case 39:
+ var h = [];
+                    h.push($$[$0-2]);
+                    h.push(newNodo("Mod", $$[$0-1], yylineno, []));
+                    h.push($$[$0]);
+                    this.$ = newNodo("Modular", "", yylineno, h);
+break;
+case 40:
+ var h = [];
+                            h.push(newNodo("Signo negativo", $$[$0-1], yylineno, []));
+                            h.push($$[$0]);
+                            this.$ = newNodo("Menos", "", yylineno, h);
+break;
+case 41:
+ var h = [];
+                                        h.push($$[$0-1]);
+                                        this.$ = newNodo("Llamada funcion con Parametros", $$[$0-3], yylineno, h); 
+break;
+case 42:
+ this.$ = newNodo("Llamada Funcion sin Parametros", $$[$0-2], yylineno, []); 
+break;
+case 44:
+ this.$ = newNodo("Identificador", $$[$0], yylineno, []); 
+break;
+case 45:
+ this.$ = newNodo("Falso", $$[$0], yylineno, []); 
+break;
+case 46:
+ this.$ = newNodo("Verdadero", $$[$0], yylineno, []); 
+break;
+case 47:
+ this.$ = newNodo("Numero", $$[$0], yylineno, []);
+break;
+case 48:
+ this.$ = newNodo("Cadena", $$[$0], yylineno, []); 
 break;
 }
 },

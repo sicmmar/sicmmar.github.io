@@ -1,16 +1,28 @@
-"use strict";
-exports.__esModule = true;
-exports.Nodo = void 0;
-var Nodo = /** @class */ (function () {
-    function Nodo(linea, valor) {
-        this.linea = linea;
-        this.nonterminal = "";
-        this.valor = valor;
-        this.hijos = [];
-    }
-    Nodo.prototype.nuevoHijo = function (nuevo) {
-        this.hijos.push(nuevo);
-    };
+var nNodo = 0;
+
+function newNodo(nt, value, line, childrens){
+    var Nodo = {nonterminal: nt, valor:value, linea: line, hijos:childrens};
     return Nodo;
-}());
-exports.Nodo = Nodo;
+}
+
+function visualizarArbol(root){
+    nNodo = 0;
+    var respuesta = "digraph arbol{\n node[shape=\"box\"]\n";
+    respuesta += recorrer(root);
+    respuesta += "}";
+    return respuesta;
+}
+
+function recorrer(root){
+    nNodo++;
+    var padre = "n" + nNodo;
+    var respuesta = padre + " [label = \""+ root.nonterminal +" \\n "+ root.valor +"\"];";
+    if(root.hijos.length > 0){
+        for(var i = 0; i < root.hijos.length; i++){
+            respuesta += padre + " -> n" + (nNodo + 1) + ";\n";
+            respuesta += recorrer(root.hijos[i]);
+        }
+    }
+
+    return respuesta;
+}

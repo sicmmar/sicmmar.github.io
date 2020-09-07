@@ -1,10 +1,4 @@
 %{
-    /*let NodoExp = require('../Arbol/Nodo');
-    let Op = require('../Expresión/Operacion');*/
-    //var err = require('Error');
-    //let lista = require('./ManejoError');
-    //var listaErrores = new lista.ManejoError();
-    var err = {tipo: 'lexico', descripcion: 'error 1', linea: 5, columna: 6, ambito: 'global', fase: 'traduccion'};
 %}
 
 

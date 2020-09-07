@@ -562,8 +562,7 @@ _handle_error:
     return true;
 }};
 
-    /*let NodoExp = require('../Arbol/Nodo');
-    let Op = require('../Expresión/Operacion');*/
+    /*let Op = require('../Expresión/Operacion');*/
     //var err = require('Error');
     //let lista = require('./ManejoError');
     //var listaErrores = new lista.ManejoError();

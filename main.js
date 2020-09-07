@@ -3,6 +3,7 @@ function analizar(entrada){
     try{
         /*let variable:number = 54.54;
         let suma:number = 32 + variable;
+        variable = (32 == 32) ? 10 : 8;
         console.log(suma); 
         //86.54*/
         console.log(entrada);

@@ -1,4 +1,11 @@
 %{
+    /*let NodoExp = require('../Arbol/Nodo');
+    let Op = require('../Expresión/Operacion');*/
+    //var err = require('Error');
+    //let lista = require('./ManejoError');
+    //var listaErrores = new lista.ManejoError();
+    var err = {tipo: 'lexico', descripcion: 'error 1', linea: 5, columna: 6, ambito: 'global', fase: 'traduccion'};
+    var resultado = "";
 %}
 
 
@@ -8,8 +15,8 @@
 
 %%
 
-("//".*\r\n)|("//".*\n)|("//".*\r)                  /* comentario de una linea */
-"/*""/"*([^*/]|[^*]"/"|"*"[^/])*"*"*"*/"            /* comentario multilinea */ 
+("//".*\r\n)|("//".*\n)|("//".*\r)                  return 'comentario';
+"/*""/"*([^*/]|[^*]"/"|"*"[^/])*"*"*"*/"            return 'multilinea'; 
 
 ">="     return '>=';
 "++"     return '++';
@@ -37,7 +44,6 @@
 ","     return ',';
 ":"     return ':';
 "."     return '.';
-"?"     return '?';
 
 "number"        return 'rnumber';
 "string"        return 'rstring';
@@ -67,7 +73,7 @@
 [´\"`'].*[´\"`']                                  %{ return 'cadena'; %}
 
 
-\s+     %{ /* skip whitespace */ %}
+\s+     %{ return 'espacio' %}
 
 
 <<EOF>>         %{ return 'EOF'; %}
@@ -78,7 +84,6 @@
 
 /* operator associations and precedence */
 /* lo que se hace de ultimo */
-%left '?'
 %left '||'
 %left '&&'
 %left '!'
@@ -114,6 +119,9 @@ INSTRUCCION
     | 'rconsole' '.' 'rlog' '(' EXP ')' 'pyc' { var h = [];
                                         h.push($5);
                                         $$ = newNodo("IMPRIMIR", "", yylineno, h); }
+    | 'comentario' {}
+    | 'multilinea' {}
+    | 'espacio' {}
     ;
 
 VAR
@@ -192,14 +200,7 @@ LENVIO
     ;
 
 EXP
-    : EXP '?' EXP ':' EXP { var h = [];
-                            h.push($1);
-                            h.push(newNodo("Interr", "?", yylineno, []));
-                            h.push($3);
-                            h.push(newNodo("Dos puntos", ":", yylineno, []));
-                            h.push($5);
-                            $$ = newNodo("Ternario", "", yylineno, h); }
-    | '(' EXP ')'  { $$ = $2; }
+    : '(' EXP ')'  { $$ = $2; }
     | EXP '||' EXP { var h = [];
                     h.push($1);
                     h.push(newNodo("", $2, yylineno, []));

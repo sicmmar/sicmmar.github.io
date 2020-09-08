@@ -19,25 +19,25 @@
 "||"     return '||';
 "=="     return '==';
 "!="     return '!=';
-"+"     return '+';
-"-"     return '-';
-"*"     return '*';
-"/"     return '/';
-"^"     return '^';
-"("     return '(';
-")"     return ')';
-"%"     return '%';
-"!"     return '!';
-"="     return '=';
-">"     return '>';
-"<"     return '<';
-"{"     return '{';
-"}"     return '}';
-";"     return 'pyc';
-","     return ',';
-":"     return ':';
-"."     return '.';
-"?"     return '?';
+"**"     return '**';
+"+"      return '+';
+"-"      return '-';
+"*"      return '*';
+"/"      return '/';
+"("      return '(';
+")"      return ')';
+"%"      return '%';
+"!"      return '!';
+"="      return '=';
+">"      return '>';
+"<"      return '<';
+"{"      return 'lla';
+"}"      return 'llc';
+";"      return 'pyc';
+","      return ',';
+":"      return ':';
+"."      return '.';
+"?"      return '?';
 
 "number"        return 'rnumber';
 "string"        return 'rstring';
@@ -64,7 +64,7 @@
 
 [0-9]+("."[0-9]+)?                          %{ return 'numero'; %}
 [a-zA-Z_][a-zA-Z0-9_]*                      %{ return 'identificador'; %}
-[´\"`'].*[´\"`']                                  %{ return 'cadena'; %}
+[´\"`'].*[´\"`']                            %{ return 'cadena'; %}
 
 
 \s+     %{ /* skip whitespace */ %}
@@ -78,6 +78,7 @@
 
 /* operator associations and precedence */
 /* lo que se hace de ultimo */
+%left '.'
 %left '?'
 %left '||'
 %left '&&'
@@ -85,7 +86,7 @@
 %left '==' '!=' '<' '>' '<=' '>='
 %left '+' '-'
 %left '/' '*'
-%left '^'
+%left '**'
 %left '%'
 %right '++' '--'
 %left UMINUS
@@ -97,8 +98,8 @@
 
 INICIO
     : LINSTRUCCION EOF { var h = [];
-                        h.push($1);
-                        return newNodo("INICIO", "", yylineno, h); }
+                    h.push($1);
+                    return newNodo("INICIO", "", yylineno, h); }
     ;
 
 LINSTRUCCION
@@ -110,10 +111,16 @@ LINSTRUCCION
     ;
 
 INSTRUCCION
-    : VAR { $$ = $1; }
+    : 'rtypes' 'identificador' '=' EXP 'pyc' { var h = [];
+                                            h.push(newNodo("Identificador", $2, yylineno, []));
+                                            h.push($4);
+                                            $$ = newNodo("TYPE", "", yylineno, h);
+    }
+    | VAR { $$ = $1; }
     | 'rconsole' '.' 'rlog' '(' EXP ')' 'pyc' { var h = [];
                                         h.push($5);
                                         $$ = newNodo("IMPRIMIR", "", yylineno, h); }
+    | 
     ;
 
 VAR
@@ -140,19 +147,22 @@ T
     ;
 
 LVAR
-    : LVAR ',' 'identificador' ':' TIPO { var h = [];
-                            h.push(newNodo("IDENTIFICADOR", $3, yylineno, [])); 
-                            h.push($5);
-                            var n = newNodo("ID", "", yylineno, h);
-                            $$ = $1;
-                            $$.hijos.push(n); }
-    | 'identificador' ':' TIPO { var h = [];
+    : LVAR ',' IDENTI {     $$ = $1;
+                            $$.hijos.push($3); }
+    | IDENTI {  var h = [];
+                h.push($1);
+                $$ = newNodo("LISTAVAR", "", yylineno, h); }
+    ;
+
+IDENTI
+    : 'identificador' ':' TIPO { var h = [];
                             h.push(newNodo("IDENTIFICADOR", $1, yylineno, [])); 
                             h.push($3);
-                            var n = newNodo("ID", "", yylineno, h);
-                            h = [];
-                            h.push(n);
-                            $$ = newNodo("LISTAVAR", "", yylineno, h);
+                            $$ = newNodo("ID", "", yylineno, h); }
+    | 'identificador' ':' 'identificador' { var h = [];
+                            h.push(newNodo("IDENTIFICADOR", $1, yylineno, [])); 
+                            h.push(newNodo("Identificador", $3, yylineno, []));
+                            $$ = newNodo("ID", "", yylineno, h);
                             }
     ;
 
@@ -161,7 +171,6 @@ TIPO
     | 'rstring' { $$ = newNodo("TIPO", $1, yylineno, []); }
     | 'rboolean' { $$ = newNodo("TIPO", $1, yylineno, []); } 
     | 'rvoid'  { $$ = newNodo("TIPO", $1, yylineno, []); }
-    | 'rtypes' { $$ = newNodo("TIPO", $1, yylineno, []); }
     ;
 
 AOD
@@ -193,13 +202,18 @@ LENVIO
 
 EXP
     : EXP '?' EXP ':' EXP { var h = [];
-                            h.push($1);
-                            h.push(newNodo("Interr", "?", yylineno, []));
-                            h.push($3);
-                            h.push(newNodo("Dos puntos", ":", yylineno, []));
-                            h.push($5);
-                            $$ = newNodo("Ternario", "", yylineno, h); }
+                    h.push($1);
+                    h.push(newNodo("Interr", "?", yylineno, []));
+                    h.push($3);
+                    h.push(newNodo("Dos puntos", ":", yylineno, []));
+                    h.push($5);
+                    $$ = newNodo("Ternario", "", yylineno, h); }
     | '(' EXP ')'  { $$ = $2; }
+    | 'lla' LVAR 'llc' { var h = [];
+                        h.push(newNodo("Llave abierta", $1, yylineno, []));
+                        h.push($2);
+                        h.push(newNodo("Llave cerrada", $3, yylineno, []));
+                        $$ = newNodo("Def. Type", "", yylineno, h); }
     | EXP '||' EXP { var h = [];
                     h.push($1);
                     h.push(newNodo("", $2, yylineno, []));
@@ -264,7 +278,7 @@ EXP
                     h.push(newNodo("Div", $2, yylineno, []));
                     h.push($3);
                     $$ = newNodo("Division", "", yylineno, h);}
-    | EXP '^' EXP { var h = [];
+    | EXP '**' EXP { var h = [];
                     h.push($1);
                     h.push(newNodo("Pot", $2, yylineno, []));
                     h.push($3);
@@ -284,6 +298,8 @@ EXP
     | 'identificador' '(' ')' { $$ = newNodo("Llamada Funcion sin Parametros", $1, yylineno, []); }
     | AOD  { $$ = $1; }
     | 'identificador' { $$ = newNodo("Identificador", $1, yylineno, []); }
+    | EXP '.' EXP { $$ = $1;
+                    $$.hijos.push($3); }
     | 'rfalse' { $$ = newNodo("Falso", $1, yylineno, []); }
     | 'rtrue' { $$ = newNodo("Verdadero", $1, yylineno, []); }
     | 'numero' { $$ = newNodo("Numero", $1, yylineno, []);}

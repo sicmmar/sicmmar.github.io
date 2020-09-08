@@ -9,7 +9,7 @@ function visualizarArbol(root){
     nNodo = 0;
     var respuesta = "digraph arbol{\n node[shape=\"box\"]\n";
     respuesta += recorrer(root);
-    respuesta += "}";
+    respuesta += "\n}";
     return respuesta;
 }
 
